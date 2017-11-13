@@ -21,6 +21,7 @@
   /*
    * debug默认是http每次刷新都请求的，这样每次你code一变化，就能自动刷新
    * release默认的是打包成离线的 放到app内部
+   * 打包命令：react-native bundle --dev false --entry-file index.js --bundle-output ios/main.jsbundle --platform ios
    */
   // run without node server in production
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
