@@ -18,9 +18,16 @@
 {
   NSURL *jsCodeLocation;
 
+  /*
+   * debug默认是http每次刷新都请求的，这样每次你code一变化，就能自动刷新
+   * release默认的是打包成离线的 放到app内部
+   */
+  // run without node server in production
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-
+  
+  // run with node server in production
+//  jsCodeLocation = [NSURL URLWithString:@"http://10.128.35.54:8081/index.bundle?platform=ios&dev=true&minify=false"];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"GithubFinder"
                                                initialProperties:nil
