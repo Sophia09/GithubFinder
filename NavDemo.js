@@ -21,7 +21,7 @@ const MyNav = StackNavigator({
     FromRightScene: {
         screen: FromRightScene,
         navigationOptions: {
-            headerTitle: 'Used navigate',
+            // headerTitle: 'Used navigate',
         }
     },
 });
