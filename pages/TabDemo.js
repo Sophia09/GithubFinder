@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react'
 import { TabNavigator } from 'react-navigation'
-import ProfileScreen from './ProfileScreen'
+import AnimationDemo from '../Animation/AnimationDemo'
 import NavDemo from './NavDemo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const RootTabs = TabNavigator({
-   Home: {
+   Navigation: {
        screen: NavDemo,
        navigationOptions: {
          tabBarLabel: 'Home',
@@ -20,8 +20,8 @@ const RootTabs = TabNavigator({
          ),
        },
    },
-    Profile: {
-        screen: ProfileScreen,
+    Animation: {
+        screen: AnimationDemo,
         navigationOptions: {
             tabBarLabel: 'Profile',
             tabBarIcon: ({ tintColor, focused }) => (

@@ -3,14 +3,14 @@
 import React, { Component } from 'react'
 import { DrawerNavigator } from 'react-navigation'
 import NavDemo from './NavDemo'
-import ProfileScreen from './ProfileScreen'
+import AnimationDemo from '../Animation/AnimationDemo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const RootDrawer = DrawerNavigator({
-    Home: {
+    Navigation: {
         screen: NavDemo,
         navigationOptions: {
-            drawerLabel: 'Home',
+            drawerLabel: 'Navigation',
             drawerIcon: ({tintColor, focused}) => (
                 <Ionicons
                     name={focused ? 'ios-home' : 'ios-home-outline'}
@@ -20,10 +20,10 @@ const RootDrawer = DrawerNavigator({
             ),
         },
     },
-    Profile: {
-        screen: ProfileScreen,
+    Animation: {
+        screen: AnimationDemo,
         navigationOptions: {
-            drawerLabel: 'Profile',
+            drawerLabel: 'Animation',
             drawerIcon: ({tintColor, focused}) => (
                 <Ionicons
                    name={focused ? 'ios-person' : 'ios-person-outline'}

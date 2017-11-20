@@ -3,8 +3,8 @@
 import { AppRegistry } from 'react-native'
 // import GithubFinder from './GithubFinder'
 //import NavDemo from './NavDemo'
-// import TabDemo from './pages/TabDemo'
-// import DrawerNavDemo from './pages/DrawerNavDemo'
-import AnimationDemo from './Animation/AnimationDemo'
+import TabDemo from './pages/TabDemo'
+//  import DrawerNavDemo from './pages/DrawerNavDemo'
 
-AppRegistry.registerComponent('GithubFinder', () => AnimationDemo);
+
+AppRegistry.registerComponent('GithubFinder', () => TabDemo);
