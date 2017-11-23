@@ -23,7 +23,8 @@ export default class HomeScene extends Component<{}> {
 
     playAudio() {
 
-        NativeAudioPlayerManager.play('');
+        // NativeAudioPlayerManager.play('');
+        NativeAudioPlayerManager.playWithURL('');
     }
 
     render() {

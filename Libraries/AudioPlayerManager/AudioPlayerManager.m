@@ -91,7 +91,8 @@ RCT_EXPORT_METHOD(playWithURL: (NSURL *)url)
   _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url
                                                         error:&error];
   if (error) {
-    [self startProgressTimer];
+    NSLog(@"Error happened in playWithURL:NSURL");
+    [self stopProgressTimer];
   }
   else {
     [self startProgressTimer];

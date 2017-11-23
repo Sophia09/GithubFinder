@@ -12,30 +12,25 @@ import { NativeModules } from 'react-native'
 
 var AudioPlayerManager = NativeModules.AudioPlayerManager;
 
-var  NativeAudioPlayerManager = {
-
-  play(path) {
-    console.log('play in NativeAudionPlayerManager');
-      AudioPlayerManager.play(path);
-  },
-
-  playWithURL(url) {
-    AudioPlayerManager.playWithURL(url);
-  },
-
-  pause() {
-    AudioPlayerManager.pause();
-  },
-
-  stop() {
-    AudioPlayerManager.stop();
-
-    if (this.subscription) {
-      this.subscription.remove();
+export default class NativeAudioPlayerManager {
+    static play(path) {
+        console.log('play in NativeAudionPlayerManager');
+        AudioPlayerManager.play(path);
     }
-  },
 
+    static playWithURL(url) {
+        AudioPlayerManager.playWithURL(url);
+    }
+
+    static pause() {
+        AudioPlayerManager.pause();
+    }
+
+    static stop() {
+        AudioPlayerManager.stop();
+
+        if (this.subscription) {
+            this.subscription.remove();
+        }
+    }
 }
-
-module.exports = NativeAudioPlayerManager;
-
