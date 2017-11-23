@@ -7,7 +7,13 @@ import {
     TouchableHighlight,
     Text,
     Button,
+    NativeModules,
+
 } from 'react-native'
+
+// import NativeAudionPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
+
+var AudioPlayerManager = NativeModules.AudioPlayerManager;
 
 export default class HomeScene extends Component<{}> {
 
@@ -17,6 +23,11 @@ export default class HomeScene extends Component<{}> {
 
         // pass a 'user' param into the route
         navigate('FromRightScene', { user: 'Sophia' });
+    }
+
+    playAudio() {
+
+        AudioPlayerManager.play('');
     }
 
     render() {
@@ -32,6 +43,9 @@ export default class HomeScene extends Component<{}> {
                 <Button onPress={() => this.props.navigation.navigate('FromRightScene', { user: 'Button' })}
                         title="Use Navigate"
                 />
+
+                <Button onPress={this.playAudio.bind(this)}
+                        title='Play Audio'/>
             </View>
         );
     }

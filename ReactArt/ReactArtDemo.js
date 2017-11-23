@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import VectorWidget from './VectorWidget'
 
+
 export default class ReactArtDemo extends Component {
     render() {
         return(
