@@ -7,13 +7,9 @@ import {
     TouchableHighlight,
     Text,
     Button,
-    NativeModules,
-
 } from 'react-native'
 
-// import NativeAudionPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
-
-var AudioPlayerManager = NativeModules.AudioPlayerManager;
+import NativeAudioPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
 
 export default class HomeScene extends Component<{}> {
 
@@ -27,7 +23,7 @@ export default class HomeScene extends Component<{}> {
 
     playAudio() {
 
-        AudioPlayerManager.play('');
+        NativeAudioPlayerManager.play('');
     }
 
     render() {
