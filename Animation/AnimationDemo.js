@@ -8,6 +8,7 @@ import CenterComponent from './CenterComponent'
 export default class AnimationDemo extends Component {
     render() {
         return(
+            // set props of SlideMenu
             <SlideMenu renderCenterView={() => <CenterComponent />}
             renderLeftView={() => <LeftComponent />}
             />

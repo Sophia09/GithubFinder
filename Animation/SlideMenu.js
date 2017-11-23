@@ -43,6 +43,7 @@ export default class SlideMenu extends Component {
        if (!this._center)
            return;
 
+       // 左移时保证 centerView 不会超过左屏幕边界，即 style= (left > 0)
        if ((this._offset + left) < 0) {
            this.left = -this._offset;
        }
