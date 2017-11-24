@@ -1,15 +1,34 @@
 'use strict';
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import {
     StyleSheet,
     View,
     TouchableHighlight,
     Text,
     Button,
+    requireNativeComponent,
 } from 'react-native'
 
 import NativeAudioPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
+
+// requireNativeComponent 会自动把这个组件提供给 'ColorfulViewManager'
+var NativeColorfulView = requireNativeComponent('ColorfulView', ColorfulView);
+
+export class ColorfulView extends Component {
+    static propTypes = {
+        isRed: PropTypes.bool.isRequired,
+    };
+
+    static defaultProps = {
+      isRed: true,
+    };
+
+    render() {
+        return <NativeColorfulView {...this.props} />
+    }
+}
 
 export default class HomeScene extends Component<{}> {
 
@@ -43,6 +62,8 @@ export default class HomeScene extends Component<{}> {
 
                 <Button onPress={this.playAudio.bind(this)}
                         title='Play Audio'/>
+
+                <ColorfulView style={styles.colorfulView} isRed={false}/>
             </View>
         );
     }
@@ -55,5 +76,9 @@ var styles = StyleSheet.create({
     scene: {
         padding: 10,
         flex: 1,
+    },
+    colorfulView: {
+      width: 100,
+      height: 100,
     },
 });
