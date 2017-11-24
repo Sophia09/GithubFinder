@@ -1,34 +1,19 @@
 'use strict';
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+
 import {
     StyleSheet,
     View,
     TouchableHighlight,
     Text,
     Button,
-    requireNativeComponent,
+
 } from 'react-native'
 
 import NativeAudioPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
+import ColorfulView from '../CustomizedView/ColorfulView'
 
-// requireNativeComponent 会自动把这个组件提供给 'RNTColorfulViewManager'
-var NativeColorfulView = requireNativeComponent('RNTColorfulView', ColorfulView);
-
-export class ColorfulView extends Component {
-    static propTypes = {
-        isRed: PropTypes.bool.isRequired,
-    };
-
-    static defaultProps = {
-      isRed: true,
-    };
-
-    render() {
-        return <NativeColorfulView {...this.props} />
-    }
-}
 
 export default class HomeScene extends Component<{}> {
 
