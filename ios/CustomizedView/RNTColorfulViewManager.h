@@ -1,5 +1,5 @@
 //
-//  ColorfulViewManager.h
+//  RNTColorfulViewManager.h
 //  GithubFinder
 //
 //  Created by Li Sai on 24/11/2017.
@@ -8,6 +8,6 @@
 
 #import <React/RCTViewManager.h>
 
-@interface ColorfulViewManager : RCTViewManager
+@interface RNTColorfulViewManager : RCTViewManager
 
 @end

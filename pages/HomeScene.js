@@ -13,8 +13,8 @@ import {
 
 import NativeAudioPlayerManager from '../Libraries/AudioPlayerManager/AudioPlayerManager.ios'
 
-// requireNativeComponent 会自动把这个组件提供给 'ColorfulViewManager'
-var NativeColorfulView = requireNativeComponent('ColorfulView', ColorfulView);
+// requireNativeComponent 会自动把这个组件提供给 'RNTColorfulViewManager'
+var NativeColorfulView = requireNativeComponent('RNTColorfulView', ColorfulView);
 
 export class ColorfulView extends Component {
     static propTypes = {
@@ -63,7 +63,7 @@ export default class HomeScene extends Component<{}> {
                 <Button onPress={this.playAudio.bind(this)}
                         title='Play Audio'/>
 
-                <ColorfulView style={styles.colorfulView} isRed={false}/>
+                <ColorfulView style={styles.colorfulView} isRed={true}/>
             </View>
         );
     }
@@ -78,7 +78,7 @@ var styles = StyleSheet.create({
         flex: 1,
     },
     colorfulView: {
-      width: 100,
-      height: 100,
+      width: 50,
+      height: 50,
     },
 });

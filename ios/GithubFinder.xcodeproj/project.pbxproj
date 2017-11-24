@@ -38,7 +38,7 @@
 		32AB6F471FC2E99500754E73 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AB6F1F1FC2E95A00754E73 /* libART.a */; };
 		32AB6F6E1FC6BC7000754E73 /* libAudioPlayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AB6F6C1FC6B2F300754E73 /* libAudioPlayerManager.a */; };
 		32AB6F731FC80F6500754E73 /* ColorfulView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AB6F721FC80F6500754E73 /* ColorfulView.m */; };
-		32AB6F761FC810B600754E73 /* ColorfulViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AB6F751FC810B600754E73 /* ColorfulViewManager.m */; };
+		32AB6F761FC810B600754E73 /* RNTColorfulViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AB6F751FC810B600754E73 /* RNTColorfulViewManager.m */; };
 		32F1B1191FB945C300EA51B7 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 32F1B1181FB945C300EA51B7 /* main.jsbundle */; };
 		32F1B11A1FB9460200EA51B7 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 32F1B1181FB945C300EA51B7 /* main.jsbundle */; };
 		401CB947E4A0418EBE421691 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC1CDBF8A22441349321D967 /* MaterialCommunityIcons.ttf */; };
@@ -374,8 +374,8 @@
 		32AB6F671FC6B2F200754E73 /* AudioPlayerManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioPlayerManager.xcodeproj; path = ../Libraries/AudioPlayerManager/AudioPlayerManager.xcodeproj; sourceTree = "<group>"; };
 		32AB6F711FC80F6500754E73 /* ColorfulView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorfulView.h; sourceTree = "<group>"; };
 		32AB6F721FC80F6500754E73 /* ColorfulView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorfulView.m; sourceTree = "<group>"; };
-		32AB6F741FC810B600754E73 /* ColorfulViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorfulViewManager.h; sourceTree = "<group>"; };
-		32AB6F751FC810B600754E73 /* ColorfulViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorfulViewManager.m; sourceTree = "<group>"; };
+		32AB6F741FC810B600754E73 /* RNTColorfulViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTColorfulViewManager.h; sourceTree = "<group>"; };
+		32AB6F751FC810B600754E73 /* RNTColorfulViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTColorfulViewManager.m; sourceTree = "<group>"; };
 		32F1B1181FB945C300EA51B7 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		54A1D72CD0A94F58A01BB57E /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -610,8 +610,8 @@
 			children = (
 				32AB6F711FC80F6500754E73 /* ColorfulView.h */,
 				32AB6F721FC80F6500754E73 /* ColorfulView.m */,
-				32AB6F741FC810B600754E73 /* ColorfulViewManager.h */,
-				32AB6F751FC810B600754E73 /* ColorfulViewManager.m */,
+				32AB6F741FC810B600754E73 /* RNTColorfulViewManager.h */,
+				32AB6F751FC810B600754E73 /* RNTColorfulViewManager.m */,
 			);
 			path = CustomizedView;
 			sourceTree = "<group>";
@@ -1206,7 +1206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32AB6F761FC810B600754E73 /* ColorfulViewManager.m in Sources */,
+				32AB6F761FC810B600754E73 /* RNTColorfulViewManager.m in Sources */,
 				32AB6F731FC80F6500754E73 /* ColorfulView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,

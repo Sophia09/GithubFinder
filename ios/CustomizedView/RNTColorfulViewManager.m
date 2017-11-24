@@ -1,15 +1,15 @@
 //
-//  ColorfulViewManager.m
+//  RNTColorfulViewManager.m
 //  GithubFinder
 //
 //  Created by Li Sai on 24/11/2017.
 //  Copyright © 2017 Facebook. All rights reserved.
 //
 
-#import "ColorfulViewManager.h"
+#import "RNTColorfulViewManager.h"
 #import "ColorfulView.h"
 
-@implementation ColorfulViewManager
+@implementation RNTColorfulViewManager
 
 RCT_EXPORT_MODULE()
 
