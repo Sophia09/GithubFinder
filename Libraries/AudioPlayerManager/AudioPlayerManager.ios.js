@@ -10,7 +10,7 @@
 import React from 'react'
 import { NativeModules } from 'react-native'
 
-var AudioPlayerManager = NativeModules.AudioPlayerManager;
+var { AudioPlayerManager } = NativeModules;
 
 export default class NativeAudioPlayerManager {
     static play(path) {
