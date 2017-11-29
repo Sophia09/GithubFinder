@@ -48,7 +48,7 @@ export default class HomeScene extends Component<{}> {
                 <Button onPress={this.playAudio.bind(this)}
                         title='Play Audio'/>
 
-                <ColorfulView style={styles.colorfulView} isRed={true}/>
+                <ColorfulView style={styles.colorfulView} isRed={false}/>
             </View>
         );
     }
