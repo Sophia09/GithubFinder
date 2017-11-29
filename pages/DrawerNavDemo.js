@@ -5,6 +5,7 @@ import { DrawerNavigator } from 'react-navigation'
 import NavDemo from './NavDemo'
 import AnimationDemo from '../Animation/AnimationDemo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import ButtonController from '../Flux/Component/ButtonController'
 
 const RootDrawer = DrawerNavigator({
     Navigation: {
@@ -30,6 +31,19 @@ const RootDrawer = DrawerNavigator({
                    size={20}
                    style={{color: tintColor}}
                 />
+            ),
+        },
+    },
+    Flux: {
+        screen: ButtonController,
+        navigationOptions: {
+          drawerLabel: 'Flux',
+          drawerIcon: ({tintColor, focused}) => (
+              <Ionicons
+                  name={focused ? 'ios-return-left' : 'ios-return-left-outline'}
+                  size={20}
+                  style={{color: tintColor}}
+              />
             ),
         },
     },
