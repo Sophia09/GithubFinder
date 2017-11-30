@@ -81,25 +81,32 @@ export default class GithubFinder extends Component<{}> {
     onSearchChange(event) {
         var searchTerm = event.nativeEvent.text.toLowerCase();
         var queryURL = BASE_URL + encodeURIComponent(searchTerm);
+        // fetch(queryURL, {
+        //     method: 'GET',
+        //     header: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json',
+        //     },
+        // })
         fetch(queryURL)
             .then((response) => response.json())
             .then((responseData) => {
-               if (responseData.items) {
-                   this.setState({
-                       // update search result
-                       dataSource: this.state.dataSource.cloneWithRows(responseData.items),
-                   });
-               }
-               else {
-                   this.setState({
-                       // update search result
-                       dataSource: this.state.dataSource.cloneWithRows([]),
-                   });
-               }
+                if (responseData.items) {
+                    this.setState({
+                        // update search result
+                        dataSource: this.state.dataSource.cloneWithRows(responseData.items),
+                    });
+                }
+                else {
+                    this.setState({
+                        // update search result
+                        dataSource: this.state.dataSource.cloneWithRows([]),
+                    });
+                }
             })
             .catch(error => {
                 console.log('onSearchChange' + error);
-        })
+            })
             .done();
     }
 }
