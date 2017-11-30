@@ -64,7 +64,7 @@ RCT_EXPORT_MODULE();
                                                      }];
 }
 
-RCT_EXPORT_METHOD(play: (NSString *)path)
+RCT_EXPORT_METHOD(play: (NSString *)path callback:(RCTResponseSenderBlock)callback)
 {
   NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
   NSString *audioFilePath = [resourcePath stringByAppendingPathComponent:path];
@@ -76,7 +76,7 @@ RCT_EXPORT_METHOD(play: (NSString *)path)
                                                         error:&error];
   
   if (error) {
-    NSLog(@"Error happened in play:NSString");
+    callback(@[@"Error happened in play:NSString"]);
     [self stopProgressTimer];
   }
   else {
@@ -85,13 +85,13 @@ RCT_EXPORT_METHOD(play: (NSString *)path)
   }
 }
 
-RCT_EXPORT_METHOD(playWithURL: (NSURL *)url)
+RCT_EXPORT_METHOD(playWithURL: (NSURL *)url callback:(RCTResponseSenderBlock)callback)
 {
   NSError *error;
   _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url
                                                         error:&error];
   if (error) {
-    NSLog(@"Error happened in playWithURL:NSURL");
+    callback(@[@"Error happened in playWithURL:NSURL"]);
     [self stopProgressTimer];
   }
   else {

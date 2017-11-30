@@ -6,6 +6,7 @@ import NavDemo from './NavDemo'
 import AnimationDemo from '../Animation/AnimationDemo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ButtonController from '../Flux/Component/ButtonController'
+import GithubFinder from './GithubFinder'
 
 const RootDrawer = DrawerNavigator({
     Navigation: {
@@ -47,6 +48,19 @@ const RootDrawer = DrawerNavigator({
             ),
         },
     },
+    Fetch: {
+        screen: GithubFinder,
+        navigationOptions: {
+          drawerLabel: 'Fetch',
+          drawerIcon: ({ tintColor, focused }) => (
+              <Ionicons
+                  name={focused ? 'ios-git-network' : 'ios-git-network-outline'}
+                  size={20}
+                  style={{color: tintColor}}
+              />
+          ),
+        },
+    }
 });
 
 export default class DrawerNavDemo extends Component {

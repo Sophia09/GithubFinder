@@ -97,6 +97,9 @@ export default class GithubFinder extends Component<{}> {
                    });
                }
             })
+            .catch(error => {
+                console.log('onSearchChange' + error);
+        })
             .done();
     }
 }

@@ -15,11 +15,19 @@ var { AudioPlayerManager } = NativeModules;
 export default class NativeAudioPlayerManager {
     static play(path) {
         console.log('play in NativeAudionPlayerManager');
-        AudioPlayerManager.play(path);
+        AudioPlayerManager.play(path, (errorMessage) => {
+            if (errorMessage) {
+                console.log('NativeAudioPlayerManager' + errorMessage);
+            }
+        });
     }
 
     static playWithURL(url) {
-        AudioPlayerManager.playWithURL(url);
+        AudioPlayerManager.playWithURL(url, (errorMessage) => {
+            if (errorMessage) {
+                console.log('NativeAudioPlayerManager' + errorMessage);
+            }
+        });
     }
 
     static pause() {
