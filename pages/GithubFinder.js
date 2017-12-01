@@ -48,7 +48,7 @@ export default class GithubFinder extends Component<{}> {
                   autoCorrect={false}
                   placeholder="Search for a project..."
                   style={styles.searchBarInput}
-                  onEndEditing={this.onSearchChange.bind(this)}
+                  onEndEditing={this.searchRepositoriesForGithub.bind(this)}
               />
                 {content}
             </View>
@@ -108,6 +108,31 @@ export default class GithubFinder extends Component<{}> {
                 console.log('onSearchChange' + error);
             })
             .done();
+    }
+
+    // ES7 中的 async & await，异步操作
+    async searchRepositoriesForGithub(event) {
+        try {
+            let keywords = event.nativeEvent.text.toLowerCase();
+            let queryURL = BASE_URL + encodeURIComponent(keywords);
+            let response = await fetch(queryURL);
+            let responseJson = await response.json();
+            if (responseJson.items && responseJson.items.length > 0) {
+                this.setState({
+                    // update search result
+                    dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
+                });
+            }
+            else {
+                alert('Oops, no related repository');
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRows([]),
+                });
+            }
+
+        } catch(error) {
+            console.log('searchRepositoriesForGithub' + error);
+        }
     }
 }
 
