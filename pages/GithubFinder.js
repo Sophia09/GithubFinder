@@ -9,6 +9,7 @@ import {
     ListView,
     Text,
     Image,
+    ActivityIndicator,
 } from 'react-native';
 
 var BASE_URL = 'http://api.github.com/search/repositories?q=';
@@ -21,6 +22,7 @@ export default class GithubFinder extends Component<{}> {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
+            spinnerAnimating : false,
         };
     }
 
@@ -51,6 +53,13 @@ export default class GithubFinder extends Component<{}> {
                   onEndEditing={this.searchRepositoriesForGithub.bind(this)}
               />
                 {content}
+
+                <ActivityIndicator
+                    ref={ (spinner) => this.spinner = spinner }
+                    style={styles.spinner}
+                    animating={this.state.spinnerAnimating}
+                    hidesWhenStopped={true}
+                />
             </View>
         );
     }
@@ -112,6 +121,12 @@ export default class GithubFinder extends Component<{}> {
 
     // ES7 中的 async & await，异步操作
     async searchRepositoriesForGithub(event) {
+
+        this.setState({
+            spinnerAnimating: true,
+        });
+
+        console.log('searching ' + event.nativeEvent.text.toLowerCase());
         try {
             let keywords = event.nativeEvent.text.toLowerCase();
             let queryURL = BASE_URL + encodeURIComponent(keywords);
@@ -121,16 +136,21 @@ export default class GithubFinder extends Component<{}> {
                 this.setState({
                     // update search result
                     dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
+                    spinnerAnimating: false,
                 });
             }
             else {
                 alert('Oops, no related repository');
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows([]),
+                    spinnerAnimating: false,
                 });
             }
 
         } catch(error) {
+           this.setState({
+               spinnerAnimating: false,
+           });
             console.log('searchRepositoriesForGithub' + error);
         }
     }
@@ -182,5 +202,8 @@ const styles = StyleSheet.create({
     blankText: {
         padding: 10,
         fontSize: 20,
-    }
+    },
+    spinner: {
+        marginTop: 20,
+    },
 });
