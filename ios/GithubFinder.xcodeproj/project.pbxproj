@@ -26,6 +26,8 @@
 		32762E991FCD627C001FE95F /* RNTColorfulViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32762E621FCD627C001FE95F /* RNTColorfulViewManager.m */; };
 		32762E9F1FCE64C3001FE95F /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32762E9E1FCE64C2001FE95F /* Ionicons.ttf */; };
 		32762EA71FCE8E93001FE95F /* libAudioPlayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32762EA51FCE8E28001FE95F /* libAudioPlayerManager.a */; };
+		3291DFFF1FD67CB10064EFC4 /* Citizen.db in Resources */ = {isa = PBXBuildFile; fileRef = 3291DFFE1FD67CB10064EFC4 /* Citizen.db */; };
+		32CE27C71FD786770084B48B /* libRNSqLiteManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3291DFFD1FD6771B0064EFC4 /* libRNSqLiteManager.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -164,6 +166,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = AudioPlayerManager;
+		};
+		3291DFFC1FD6771B0064EFC4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3291DFF81FD6771B0064EFC4 /* RNSqLiteManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSqLiteManager;
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -319,6 +328,8 @@
 		32762E621FCD627C001FE95F /* RNTColorfulViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTColorfulViewManager.m; sourceTree = "<group>"; };
 		32762E9E1FCE64C2001FE95F /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = GithubFinder/Ionicons.ttf; sourceTree = "<group>"; };
 		32762EA01FCE8E28001FE95F /* AudioPlayerManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioPlayerManager.xcodeproj; path = ../Libraries/AudioPlayerManager/AudioPlayerManager.xcodeproj; sourceTree = "<group>"; };
+		3291DFF81FD6771B0064EFC4 /* RNSqLiteManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSqLiteManager.xcodeproj; path = ../SQLiteManager/ios/RNSqLiteManager.xcodeproj; sourceTree = "<group>"; };
+		3291DFFE1FD67CB10064EFC4 /* Citizen.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Citizen.db; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -338,6 +349,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CE27C71FD786770084B48B /* libRNSqLiteManager.a in Frameworks */,
 				32762EA71FCE8E93001FE95F /* libAudioPlayerManager.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -440,6 +452,7 @@
 		13B07FAE1A68108700A75B9A /* GithubFinder */ = {
 			isa = PBXGroup;
 			children = (
+				3291DFFE1FD67CB10064EFC4 /* Citizen.db */,
 				32762E9E1FCE64C2001FE95F /* Ionicons.ttf */,
 				32762E5E1FCD627C001FE95F /* CustomizedView */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -500,6 +513,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3291DFF91FD6771B0064EFC4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3291DFFD1FD6771B0064EFC4 /* libRNSqLiteManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +542,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3291DFF81FD6771B0064EFC4 /* RNSqLiteManager.xcodeproj */,
 				32762EA01FCE8E28001FE95F /* AudioPlayerManager.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -701,6 +723,10 @@
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
+				{
+					ProductGroup = 3291DFF91FD6771B0064EFC4 /* Products */;
+					ProjectRef = 3291DFF81FD6771B0064EFC4 /* RNSqLiteManager.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -835,6 +861,13 @@
 			fileType = archive.ar;
 			path = libAudioPlayerManager.a;
 			remoteRef = 32762EA41FCE8E28001FE95F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3291DFFD1FD6771B0064EFC4 /* libRNSqLiteManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSqLiteManager.a;
+			remoteRef = 3291DFFC1FD6771B0064EFC4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -977,6 +1010,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3291DFFF1FD67CB10064EFC4 /* Citizen.db in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				32762E9F1FCE64C3001FE95F /* Ionicons.ttf in Resources */,
