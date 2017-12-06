@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import {
     View,
     Text,
+    Button,
     StyleSheet,
     ListView,
+    TextInput,
 } from 'react-native'
 
 import RNSqLiteManager from '../SQLiteManager/index'
@@ -19,7 +21,7 @@ export default class SQLiteDemo extends Component {
         };
     }
 
-    componentDidMount() {
+    getAllPersonInfo(event) {
         RNSqLiteManager.initDatabase((result) => {
             console.log('name of first person = ' + result[0]['name'] );
             this.setState({
@@ -28,20 +30,51 @@ export default class SQLiteDemo extends Component {
         });
     }
 
+    searchByPersonName(event) {
+        let name = this.nameInput._lastNativeText.toLowerCase();
+        console.log('search by person name = ' + name);
+        RNSqLiteManager.searchByName(name, (result) => {
+            this.setState({
+                personArray: this.state.personArray.cloneWithRows(result),
+            });
+        });
+    }
+
     render() {
+        var content;
+        if (this.state.personArray.getRowCount() === 0) {
+            content = <Text style={{padding: 10}}>No Info to show.</Text>
+        }
+        else {
+            content = <ListView
+                dataSource={this.state.personArray}
+                renderRow={this.showPersonalInfo.bind(this)}
+                automaticallyAdjustContentInsets={false}
+                keyboardDismissMode='on-drag'
+                keyboardShouldPersistTaps='always'
+                showsVerticalScrollIndicator={true}
+            />
+        }
 
         return(
             <View style={styles.container}>
-                <Text style={styles.guide}>SQLite Demo</Text>
+                <View style={styles.showAll}>
+                    <Button
+                        title='Show All'
+                        onPress={this.getAllPersonInfo.bind(this)}
+                    />
+                </View>
+                <View style={{flexDirection: 'row', margin: 10,}}>
+                    <TextInput
+                        style={styles.nameInput}
+                        placeholder='Search by name'
+                    ref={(nameInput) => {this.nameInput = nameInput}}/>
+                    <Button title='Search'
+                            onPress={this.searchByPersonName.bind(this)}
+                    />
+                </View>
                 <View style={styles.topBorder}/>
-                <ListView
-                    dataSource={this.state.personArray}
-                    renderRow={this.showPersonalInfo.bind(this)}
-                    automaticallyAdjustContentInsets={false}
-                    keyboardDismissMode='on-drag'
-                    keyboardShouldPersistTaps='always'
-                    showsVerticalScrollIndicator={true}
-                />
+                {content}
 
             </View>
         );
@@ -65,9 +98,10 @@ let styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
     },
-    guide: {
-        padding: 5,
-        paddingTop: 40,
+    showAll: {
+        margin: 5,
+        marginTop: 40,
+        alignItems: 'flex-start',
     },
     personalRow: {
         padding: 5,
@@ -86,6 +120,10 @@ let styles = StyleSheet.create({
         backgroundColor: 'black',
         height: 1,
         marginTop: 20,
+    },
+    nameInput: {
+        backgroundColor: '#EAEAEA',
+        width: 200,
     },
 });
 

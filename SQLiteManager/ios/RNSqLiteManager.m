@@ -25,28 +25,14 @@ const NSString *kDatabaseName = @"Citizen.db";
     NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docDir = docPaths[0];
     
-    return [docDir stringByAppendingPathComponent:kDatabaseName];    
-}
-
-RCT_EXPORT_METHOD(test) {
-    NSLog(@"%s", __func__);
+    return [docDir stringByAppendingPathComponent:kDatabaseName];
 }
 
 RCT_EXPORT_METHOD(initDatabase:(RCTResponseSenderBlock)callback) {
-    NSLog(@"%s", __func__);
+    
     NSString *dbPath = [self dataFilePath];
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
-        // copy database from main bundle to document dir
-        NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kDatabaseName];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath]) {
-            NSError *error;
-            [[NSFileManager defaultManager] copyItemAtPath:sourcePath
-                                                    toPath:dbPath
-                                                     error:&error];
-            if (error) {
-                callback(@[[error localizedDescription]]);
-            }
-        }
+        [self copyDBToDocumentDir:callback];
     }
     
     if (sqlite3_open([[self dataFilePath] UTF8String], &database) != SQLITE_OK) {
@@ -60,9 +46,9 @@ RCT_EXPORT_METHOD(initDatabase:(RCTResponseSenderBlock)callback) {
         NSMutableArray *result = [NSMutableArray array];
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
-            char *personID = sqlite3_column_text(statement, 0);
-            char *name = sqlite3_column_text(statement, 1);
-            char *address = sqlite3_column_text(statement, 2);
+            char *personID = (char *)sqlite3_column_text(statement, 0);
+            char *name = (char *)sqlite3_column_text(statement, 1);
+            char *address = (char *)sqlite3_column_text(statement, 2);
             
             [result addObject:@{
                                 @"id" : [[NSString alloc] initWithUTF8String:personID],
@@ -74,6 +60,50 @@ RCT_EXPORT_METHOD(initDatabase:(RCTResponseSenderBlock)callback) {
         sqlite3_finalize(statement);
     }
     sqlite3_close(database);
+}
+
+
+RCT_EXPORT_METHOD(searchByName:(NSString *)name callback:(RCTResponseSenderBlock)callback) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]]) {
+        [self copyDBToDocumentDir:callback];
+    }
+    
+    if (sqlite3_open([[self dataFilePath] UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSAssert(0, @"open database failed.");
+    }
+    NSString *searchByName = [NSString stringWithFormat:@"select name, address from person where name like '%%%@%%'", name];
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [searchByName UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        NSMutableArray *result = [NSMutableArray array];
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            char *name = (char *)sqlite3_column_text(statement, 0);
+            char *address = (char *)sqlite3_column_text(statement, 1);
+            
+            [result addObject:@{
+                                @"name" : [[NSString alloc] initWithUTF8String:name],
+                                @"address" : [[NSString alloc] initWithUTF8String:address],
+                                }];
+        }
+        sqlite3_finalize(statement);
+        callback(@[result]);
+    }
+    sqlite3_close(database);
+}
+
+
+- (void)copyDBToDocumentDir:(RCTResponseSenderBlock)callback {
+    // copy database from main bundle to document dir
+    NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kDatabaseName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath]) {
+        NSError *error;
+        [[NSFileManager defaultManager] copyItemAtPath:sourcePath
+                                                toPath:[self dataFilePath]
+                                                 error:&error];
+        if (error) {
+            callback(@[[error localizedDescription]]);
+        }
+    }
 }
 
 @end
