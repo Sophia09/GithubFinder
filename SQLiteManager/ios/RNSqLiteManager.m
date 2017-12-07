@@ -114,6 +114,28 @@ RCT_EXPORT_METHOD(findFruitWithId:(nonnull NSNumber *)fruitId callback:(RCTRespo
     sqlite3_close(database);
 }
 
+RCT_EXPORT_METHOD(addFruitByName:(NSString *)name result:(RCTResponseSenderBlock)message) {
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]]) {
+        [self copyDBToDocumentDir:message];
+    }
+    if (sqlite3_open([[self dataFilePath] UTF8String], &database) == SQLITE_OK) {
+        char *addFruit = "insert into FruitInChina (name) values (?);";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, addFruit, -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [name UTF8String], -1, NULL);
+        }
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            message(@[@"add fruit by name done."]);
+        }
+        else {
+            message(@[@"add fruit by name failed."]);
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(database);
+    }
+}
+
 - (void)copyDBToDocumentDir:(RCTResponseSenderBlock)callback {
     // copy database from main bundle to document dir
     NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kDatabaseName];

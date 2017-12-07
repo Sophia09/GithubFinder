@@ -47,13 +47,20 @@ export default class SQLiteDemo extends Component {
     }
 
     searchFruitById(event) {
-        let id = this.idInput._lastNativeText.toLowerCase();
+        let id = this.idInput._lastNativeText;
         // Use Number to change data from string to numeric
         RNSqLiteManager.findFruitWithId(Number(id), (result) => {
             this.setState({
                 personArray: this.state.personArray.cloneWithRows([]),
                 fruitArray: this.state.fruitArray.cloneWithRows(result),
             });
+        });
+    }
+
+    addFruit(event) {
+        let name = this.fruitNameInput._lastNativeText;
+        RNSqLiteManager.addFruitByName(name, (message) => {
+            alert(message);
         });
     }
 
@@ -78,12 +85,14 @@ export default class SQLiteDemo extends Component {
 
         return(
             <View style={styles.container}>
+
                 <View style={styles.showAll}>
                     <Button
                         title='Show All'
                         onPress={this.getAllPersonInfo.bind(this)}
                     />
                 </View>
+
                 <View style={styles.searchText}>
                     <TextInput
                         style={styles.nameInput}
@@ -94,18 +103,32 @@ export default class SQLiteDemo extends Component {
                             onPress={this.searchByPersonName.bind(this)}
                     />
                 </View>
+
                 <View style={styles.searchText}>
                     <TextInput
                         style={styles.nameInput}
                         placeholder='search fruit by id'
                         ref={(idInput) => {this.idInput = idInput} }
+                        keyboardType='numeric'
                     />
                     <Button
                         title='Search'
                         onPress={this.searchFruitById.bind(this)}
                     />
-
                 </View>
+
+                <View style={styles.searchText}>
+                    <TextInput
+                        style={styles.nameInput}
+                        placeholder='input fruit name'
+                        ref={(fruitNameInput) => {this.fruitNameInput = fruitNameInput} }
+                    />
+                    <Button
+                        title='Add Fruit'
+                        onPress={this.addFruit.bind(this)}
+                    />
+                </View>
+
                 <View style={styles.topBorder}/>
                 {content}
 
