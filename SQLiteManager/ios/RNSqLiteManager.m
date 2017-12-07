@@ -91,6 +91,28 @@ RCT_EXPORT_METHOD(searchByName:(NSString *)name callback:(RCTResponseSenderBlock
     sqlite3_close(database);
 }
 
+RCT_EXPORT_METHOD(findFruitWithId:(nonnull NSNumber *)fruitId callback:(RCTResponseSenderBlock)callback) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]]) {
+        [self copyDBToDocumentDir:callback];
+    }
+    
+    if (sqlite3_open([[self dataFilePath] UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSAssert(0, @"open database failed.");
+    }
+    NSString *findFruitById = [NSString stringWithFormat:@"select name from FruitInChina where id=%@", fruitId];
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [findFruitById UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        NSMutableArray *result = [NSMutableArray array];
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            char *fruitName = (char *)sqlite3_column_text(statement, 0);
+            [result addObject:[[NSString alloc] initWithUTF8String:fruitName]];
+        }
+        callback(@[result]);
+        sqlite3_finalize(statement);
+    }
+    sqlite3_close(database);
+}
 
 - (void)copyDBToDocumentDir:(RCTResponseSenderBlock)callback {
     // copy database from main bundle to document dir

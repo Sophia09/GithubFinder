@@ -15,40 +15,59 @@ export default class SQLiteDemo extends Component {
     constructor() {
         super();
         this.state = {
-          personArray: new ListView.DataSource({
-              rowHasChanged: (row1, row2) => row1 !== row2,
-          }),
+            personArray: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            }),
+            fruitArray: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            }),
         };
     }
 
     getAllPersonInfo(event) {
         RNSqLiteManager.initDatabase((result) => {
-            console.log('name of first person = ' + result[0]['name'] );
+
             this.setState({
                 personArray: this.state.personArray.cloneWithRows(result),
+                fruitArray: this.state.fruitArray.cloneWithRows([]),
             });
         });
     }
 
     searchByPersonName(event) {
+
         let name = this.nameInput._lastNativeText.toLowerCase();
-        console.log('search by person name = ' + name);
+
         RNSqLiteManager.searchByName(name, (result) => {
             this.setState({
                 personArray: this.state.personArray.cloneWithRows(result),
+                fruitArray: this.state.fruitArray.cloneWithRows([]),
+            });
+        });
+    }
+
+    searchFruitById(event) {
+        let id = this.idInput._lastNativeText.toLowerCase();
+        RNSqLiteManager.findFruitWithId(Number(id), (result) => {
+            this.setState({
+                personArray: this.state.personArray.cloneWithRows([]),
+                fruitArray: this.state.fruitArray.cloneWithRows(result),
             });
         });
     }
 
     render() {
+
         var content;
-        if (this.state.personArray.getRowCount() === 0) {
+        if (this.state.personArray.getRowCount() === 0 &&
+            this.state.fruitArray.getRowCount() === 0) {
             content = <Text style={{padding: 10}}>No Info to show.</Text>
         }
         else {
+            let dataSource = this.state.personArray.getRowCount() > 0 ? this.state.personArray : this.state.fruitArray;
             content = <ListView
-                dataSource={this.state.personArray}
-                renderRow={this.showPersonalInfo.bind(this)}
+                dataSource={dataSource}
+                renderRow={this.renderRow.bind(this)}
                 automaticallyAdjustContentInsets={false}
                 keyboardDismissMode='on-drag'
                 keyboardShouldPersistTaps='always'
@@ -64,14 +83,27 @@ export default class SQLiteDemo extends Component {
                         onPress={this.getAllPersonInfo.bind(this)}
                     />
                 </View>
-                <View style={{flexDirection: 'row', margin: 10,}}>
+                <View style={styles.searchText}>
                     <TextInput
                         style={styles.nameInput}
-                        placeholder='Search by name'
-                    ref={(nameInput) => {this.nameInput = nameInput}}/>
+                        placeholder='Search person by name'
+                        ref={(nameInput) => {this.nameInput = nameInput}}
+                    />
                     <Button title='Search'
                             onPress={this.searchByPersonName.bind(this)}
                     />
+                </View>
+                <View style={styles.searchText}>
+                    <TextInput
+                        style={styles.nameInput}
+                        placeholder='search fruit by id'
+                        ref={(idInput) => {this.idInput = idInput} }
+                    />
+                    <Button
+                        title='Search'
+                        onPress={this.searchFruitById.bind(this)}
+                    />
+
                 </View>
                 <View style={styles.topBorder}/>
                 {content}
@@ -80,16 +112,31 @@ export default class SQLiteDemo extends Component {
         );
     }
 
-    showPersonalInfo(person) {
-        return(
-            <View style={styles.personalRow}>
-                <View style={styles.personalInfo}>
-                    <Text>{person.name}</Text>
-                    <Text>{person.address}</Text>
+    renderRow(item) {
+
+        if (this.state.personArray.getRowCount() > 0) {
+            return(
+                <View style={styles.personalRow}>
+                    <View style={styles.personalInfo}>
+                        <Text>{item.name}</Text>
+                        <Text>{item.address}</Text>
+                    </View>
+                    <View style={styles.cellBorder}/>
                 </View>
-                <View style={styles.cellBorder}/>
-            </View>
-        );
+            );
+        }
+        else {
+
+            return(
+                <View style={styles.personalRow}>
+                    <View style={styles.personalInfo}>
+                        <Text>{item}</Text>
+                    </View>
+                    <View style={styles.cellBorder}/>
+                </View>
+            );
+        }
+
     }
 }
 
@@ -124,6 +171,10 @@ let styles = StyleSheet.create({
     nameInput: {
         backgroundColor: '#EAEAEA',
         width: 200,
+    },
+    searchText: {
+        flexDirection: 'row',
+        margin: 10,
     },
 });
 
