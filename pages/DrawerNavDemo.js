@@ -68,7 +68,7 @@ const RootDrawer = DrawerNavigator({
           drawerLabel: 'SQLiteDemo',
             drawerIcon: ({tintColor, focused}) => (
                 <Ionicons
-                    name={focused ? 'ios-return-left' : 'ios-return-left-outline'}
+                    name={focused ? 'ios-analytics' : 'ios-analytics-outline'}
                     size={20}
                     style={{color: tintColor}}
                 />
