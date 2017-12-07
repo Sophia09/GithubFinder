@@ -48,6 +48,7 @@ export default class SQLiteDemo extends Component {
 
     searchFruitById(event) {
         let id = this.idInput._lastNativeText.toLowerCase();
+        // Use Number to change data from string to numeric
         RNSqLiteManager.findFruitWithId(Number(id), (result) => {
             this.setState({
                 personArray: this.state.personArray.cloneWithRows([]),
