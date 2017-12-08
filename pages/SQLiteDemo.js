@@ -22,6 +22,9 @@ export default class SQLiteDemo extends Component {
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
         };
+        this.username = null;
+        this.fruitId = null;
+        this.fruitName = null;
     }
 
     getAllPersonInfo(event) {
@@ -36,32 +39,36 @@ export default class SQLiteDemo extends Component {
 
     searchByPersonName(event) {
 
-        let name = this.nameInput._lastNativeText.toLowerCase();
-
-        RNSqLiteManager.searchByName(name, (result) => {
-            this.setState({
-                personArray: this.state.personArray.cloneWithRows(result),
-                fruitArray: this.state.fruitArray.cloneWithRows([]),
+        if (this.username != null ) {
+            RNSqLiteManager.searchByName(this.username, (result) => {
+                this.setState({
+                    personArray: this.state.personArray.cloneWithRows(result),
+                    fruitArray: this.state.fruitArray.cloneWithRows([]),
+                });
             });
-        });
+        }
     }
 
     searchFruitById(event) {
-        let id = this.idInput._lastNativeText;
-        // Use Number to change data from string to numeric
-        RNSqLiteManager.findFruitWithId(Number(id), (result) => {
-            this.setState({
-                personArray: this.state.personArray.cloneWithRows([]),
-                fruitArray: this.state.fruitArray.cloneWithRows(result),
+
+        if (this.fruitId != null ) {
+            // Use Number to change data from string to numeric
+            RNSqLiteManager.findFruitWithId(Number(this.fruitId), (result) => {
+                this.setState({
+                    personArray: this.state.personArray.cloneWithRows([]),
+                    fruitArray: this.state.fruitArray.cloneWithRows(result),
+                });
             });
-        });
+        }
     }
 
     addFruit(event) {
-        let name = this.fruitNameInput._lastNativeText;
-        RNSqLiteManager.addFruitByName(name, (message) => {
-            alert(message);
-        });
+
+        if (this.fruitName != null) {
+            RNSqLiteManager.addFruitByName(this.fruitName, (message) => {
+                alert(message);
+            });
+        }
     }
 
     render() {
@@ -97,7 +104,7 @@ export default class SQLiteDemo extends Component {
                     <TextInput
                         style={styles.nameInput}
                         placeholder='Search person by name'
-                        ref={(nameInput) => {this.nameInput = nameInput}}
+                        onChangeText={ (username) => this.username = username }
                     />
                     <Button title='Search'
                             onPress={this.searchByPersonName.bind(this)}
@@ -108,7 +115,7 @@ export default class SQLiteDemo extends Component {
                     <TextInput
                         style={styles.nameInput}
                         placeholder='search fruit by id'
-                        ref={(idInput) => {this.idInput = idInput} }
+                        onChangeText={ (fruitId) => this.fruitId = fruitId }
                         keyboardType='numeric'
                     />
                     <Button
@@ -121,7 +128,7 @@ export default class SQLiteDemo extends Component {
                     <TextInput
                         style={styles.nameInput}
                         placeholder='input fruit name'
-                        ref={(fruitNameInput) => {this.fruitNameInput = fruitNameInput} }
+                        onChangeText={ (fruitName) => this.fruitName = fruitName }
                     />
                     <Button
                         title='Add Fruit'
